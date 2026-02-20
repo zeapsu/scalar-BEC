@@ -31,23 +31,38 @@ with Strang split-step (time-splitting spectral):
 
 ```bash
 cd ~/projects/scalar-BEC
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -U pip
-pip install -r requirements.txt
+uv sync
 ```
 
 Run a demo simulation:
 
 ```bash
-python -m scalar_bec.cli --nx 256 --ny 256 --steps 200 --dt 0.0005 --benchmark
+uv run scalar-bec --nx 256 --ny 256 --steps 200 --dt 0.0005 --benchmark
 ```
 
 Run benchmarking:
 
 ```bash
-python benchmarks/benchmark_scaling.py
-python benchmarks/benchmark_convergence.py
+uv run python benchmarks/benchmark_scaling.py
+uv run python benchmarks/benchmark_convergence.py
+```
+
+Run tests:
+
+```bash
+uv sync --group dev
+uv run pytest
+```
+
+## Colab Runtime Quickstart
+
+In a Colab-hosted runtime (including GPU runtimes), clone the repo and sync with `uv`:
+
+```python
+!git clone https://github.com/<you>/scalar-BEC.git
+%cd scalar-BEC
+!pip install -q uv
+!uv sync
 ```
 
 ## CUDA notes
@@ -57,15 +72,16 @@ If JAX with CUDA is installed and a GPU is visible, code runs on GPU automatical
 Check backend:
 
 ```bash
-python -c "import jax; print(jax.default_backend(), jax.devices())"
+uv run python -c "import jax; print(jax.default_backend(), jax.devices())"
 ```
 
 ## Optional C++ extension
 
-Build extension:
+The optional `scalar_bec_cpp` extension is built as part of package installation.
+To force reinstall/rebuild:
 
 ```bash
-pip install -e .
+uv sync --reinstall
 ```
 
 The module is `scalar_bec_cpp` and is used opportunistically in Python if available.

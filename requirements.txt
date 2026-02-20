@@ -1,7 +1,0 @@
-jax>=0.4.30
-jaxlib>=0.4.30
-numpy>=1.26
-matplotlib>=3.8
-pandas>=2.2
-pybind11>=2.12
-scipy>=1.13
