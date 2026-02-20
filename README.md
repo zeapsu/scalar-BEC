@@ -6,9 +6,9 @@ High-performance time-splitting spectral solver for the scalar Gross–Pitaevski
 
 We solve (dimensionless form):
 
-\[
+$$
  i\partial_t\psi = \left[-\frac{1}{2}\nabla^2 + V(x,y) + g|\psi|^2\right]\psi
-\]
+$$
 
 with Strang split-step (time-splitting spectral):
 
